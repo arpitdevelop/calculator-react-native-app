@@ -1,44 +1,20 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 
-export default function ButtonsRowOf4({row, inputTextAdd}) {
-
-  const inputTextAdd = (input) => {
-    newInputText = inputText + input;
-    setInputText(newInputText);
-    console.log(inputText)}
-  }
-
-
-
+export default function ButtonsRowOf4({row, onButtonPress}) {
   return (
     <View style={styles.buttonsContainer}>
-
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={inputTextAdd(row[0])}>
-          <Text>{row[0]}</Text>
-        </Pressable>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={() => console.log("pressed")}>
-          <Text>{row[1]}</Text>
-        </Pressable>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={() => console.log("pressed")}>
-          <Text>{row[2]}</Text>
-        </Pressable>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={() => console.log("pressed")}>
-          <Text>{row[3]}</Text>
-        </Pressable>
-      </View>
+      {row.map((button, index) => (
+        <View key={index} style={styles.buttonContainer}>
+          <Pressable 
+            style={styles.button} 
+            onPress={() => onButtonPress(button)}
+          >
+            <Text>{button}</Text>
+          </Pressable>
+        </View>
+      ))}
     </View>
-    
   )
 }
 
@@ -56,7 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 3,
     backgroundColor: 'yellow',
-
   },
   button: {
     borderRadius: 10,

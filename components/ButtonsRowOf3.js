@@ -1,29 +1,22 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 
-export default function ButtonsRowOf3({row}) {
+export default function ButtonsRowOf3({row, onButtonPress}) {
   return (
     <View style={styles.buttonsContainer}>
-      <View style={[styles.buttonContainer, {width: '50%'}]}>
-        <Pressable style={styles.button} onPress={() => console.log("pressed")}>
-          <Text>{row[0]}</Text>
-        </Pressable>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={() => console.log("pressed")}>
-          <Text>{row[1]}</Text>
-        </Pressable>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={() => console.log("pressed")}>
-          <Text>{row[2]}</Text>
-        </Pressable>
-      </View>
+      {row.map((button, index) => (
+        <View key={index} style={button === "0" ? [styles.buttonContainer, {width: '50%'}] : styles.buttonContainer}>
+          <Pressable 
+            style={styles.button} 
+            onPress={() => onButtonPress(button)}
+          >
+            <Text>{button}</Text>
+          </Pressable>
+        </View>
+      ))}
     </View>
   )
-}
+  }
 
 const styles = StyleSheet.create({
   buttonsContainer: {
